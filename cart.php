@@ -1,28 +1,10 @@
 <?php
 session_start();
 $title = "Your Cart";
+
+
+include 'include/cart.php';
 include 'templates/header.php';
-include 'include/database.php';
-
-// Retrieve cart items from the session
-$cart = $_SESSION['cart'] ?? [];
-
-// Fetch products from the database based on cart items
-$products = [];
-
-if (!empty($cart)) {
-    $productIds = array_keys($cart);
-
-    // Using a prepared statement to prevent SQL injection
-    $placeholders = str_repeat('?,', count($productIds) - 1) . '?';
-    $sql = "SELECT * FROM products WHERE id IN ($placeholders)";
-
-    // Prepare and execute the query
-    $stmt = $db->prepare($sql);
-    $stmt->execute($productIds);
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 ?>
 
 
@@ -50,8 +32,8 @@ if (!empty($cart)) {
                 ?>
                     <div class="mb-4 p-4 bg-base-300 rounded-lg" id="product_<?= $product_id ?>">
                         <div class="flex justify-end gap-2 items-center">
-                            <a class="delete-product-btn" data-productid="<?= $product_id ?>"><img src="assets/delete.png" class="w-5"></img></a>
-                            <input type="checkbox" name="checkout[]" value="<?= $item_total ?>" checked>
+                            <a class="delete-product-btn" data-productid="<?= $product_id ?>"><i class="fas fa-trash-alt"></i></a>
+                            <input type="checkbox" name="checkout[]" value="<?= $item_total ?>" checked class="checkbox-sm">
                         </div>
                         <div class="flex justify-center items-center">
                             <div class="w-1/4 md:w-1/3">

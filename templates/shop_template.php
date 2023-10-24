@@ -42,7 +42,7 @@
                         <p><?php echo $product["description"]; ?></p> -->
                         <p><span>$<?php echo $product["price"]; ?></span></p>
 
-                        <form method="post" action="shop.php">
+                        <form method="post" action="include/shop.php">
                             <input type="hidden" name="product_id" value="<?php echo $product["id"]; ?>">
                             <label for="product<?php echo $product["id"]; ?>_quantity">Quantity:</label>
                             <input type="number" id="product<?php echo $product["id"]; ?>_quantity" name="product_quantity" value="" min="0" max="10">
